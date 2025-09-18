@@ -274,6 +274,20 @@ export default function Products({ products }) {
           .min-h-screen {
             padding-top: 80px !important;
           }
+
+          /* Modal Close Button Tablet Düzenlemesi */
+          .modal-close-btn {
+            width: 42px !important;
+            height: 42px !important;
+            font-size: 22px !important;
+            z-index: 99999 !important;
+            touch-action: manipulation !important;
+            -webkit-tap-highlight-color: transparent !important;
+            user-select: none !important;
+            -webkit-user-select: none !important;
+            -moz-user-select: none !important;
+            -ms-user-select: none !important;
+          }
         }
 
         @media (max-width: 480px) {
@@ -323,6 +337,22 @@ export default function Products({ products }) {
 
           .min-h-screen {
             padding-top: 70px !important;
+          }
+
+          /* Modal Close Button Mobil Düzenlemesi */
+          .modal-close-btn {
+            width: 44px !important;
+            height: 44px !important;
+            top: 10px !important;
+            right: 10px !important;
+            font-size: 24px !important;
+            z-index: 99999 !important;
+            touch-action: manipulation !important;
+            -webkit-tap-highlight-color: transparent !important;
+            user-select: none !important;
+            -webkit-user-select: none !important;
+            -moz-user-select: none !important;
+            -ms-user-select: none !important;
           }
         }
       `}</style>
@@ -516,8 +546,12 @@ function ProductModal({ product, onClose }) {
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       {/* Backdrop */}
       <div 
-        className="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-40"
-        onClick={onClose}
+        className="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-40 cursor-pointer"
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          onClose();
+        }}
       ></div>
       
       {/* Modal Content */}
@@ -528,8 +562,13 @@ function ProductModal({ product, onClose }) {
         {/* Close Button */}
         <button
           type="button"
-          onClick={(e) => { e.stopPropagation(); onClose(); }}
-          className="absolute top-4 right-4 z-60 w-8 h-8 bg-red-500 text-white rounded-full flex items-center justify-center hover:bg-red-600 transition-colors"
+          onClick={(e) => { 
+            e.preventDefault(); 
+            e.stopPropagation(); 
+            onClose(); 
+          }}
+          className="modal-close-btn absolute top-4 right-4 z-[9999] w-10 h-10 bg-red-500 text-white rounded-full flex items-center justify-center hover:bg-red-600 transition-colors shadow-lg border-2 border-white cursor-pointer"
+          style={{ fontSize: '20px', lineHeight: '1' }}
         >
           ×
         </button>
